@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "WeldingSystem.Contracts.Proto";
+
+package welding;
+
+// Emitted by the hardware controller simulator for every weld cycle.
+message WeldingEvent {
+  string machine_id = 1;
+  string job_id = 2;
+  double current_amps = 3;
+  double voltage_volts = 4;
+  double weld_duration_ms = 5;
+  int32 error_code = 6;      // 0 = no error
+  int64 timestamp_unix_ms = 7;
+}
+
+// Wrapper allowing the hardware simulator to batch multiple events per send.
+message WeldingEventBatch {
+  repeated WeldingEvent events = 1;
+}

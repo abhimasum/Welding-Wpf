@@ -1,0 +1,46 @@
+<Window x:Class="WeldingSystem.Client.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Welding System Monitor \u2014 LINE3-WELDER-01" Height="420" Width="760">
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Dashboard tile: bound to DashboardViewModel, Subscriber #1 -->
+        <StackPanel Grid.Column="0" Margin="0,0,12,0">
+            <TextBlock Text="Live Dashboard" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <Border Background="#1B232C" CornerRadius="8" Padding="16" Margin="0,0,0,10">
+                <StackPanel>
+                    <TextBlock Text="Current (A)" Foreground="Gray" FontSize="11"/>
+                    <TextBlock Text="{Binding Dashboard.CurrentAmps, StringFormat={}{0:F1} A}"
+                               FontSize="28" FontWeight="Bold" Foreground="#38BDF8"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#1B232C" CornerRadius="8" Padding="16" Margin="0,0,0,10">
+                <StackPanel>
+                    <TextBlock Text="Voltage (V)" Foreground="Gray" FontSize="11"/>
+                    <TextBlock Text="{Binding Dashboard.VoltageVolts, StringFormat={}{0:F1} V}"
+                               FontSize="28" FontWeight="Bold" Foreground="#34D399"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#1B232C" CornerRadius="8" Padding="16">
+                <StackPanel>
+                    <TextBlock Text="Machine State" Foreground="Gray" FontSize="11"/>
+                    <TextBlock Text="{Binding Dashboard.MachineState}"
+                               FontSize="22" FontWeight="Bold" Foreground="#F5A623"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <!-- Alarm log: bound to AlarmsViewModel, Subscriber #2, reacting to the SAME event -->
+        <StackPanel Grid.Column="1" Margin="12,0,0,0">
+            <TextBlock Text="Alarm Log" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+            <ListBox ItemsSource="{Binding Alarms.AlarmLog}" Height="320" Background="#121822" Foreground="#F87171"/>
+        </StackPanel>
+    </Grid>
+</Window>

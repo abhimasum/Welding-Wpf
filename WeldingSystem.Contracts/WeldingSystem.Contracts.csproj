@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <!-- net48 chosen to match WCF (System.ServiceModel) + WPF client compatibility.
+         If you prefer .NET 8, swap WCF for CoreWCF and target net8.0-windows throughout. -->
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- protobuf-net.Grpc / Google.Protobuf both work; this solution uses Google's official
+         codegen via the Grpc.Tools package, which generates WeldingEvent.cs from the .proto below. -->
+    <PackageReference Include="Google.Protobuf" Version="3.27.2" />
+    <PackageReference Include="Grpc.Tools" Version="2.64.0" PrivateAssets="All" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.3" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.10.3" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.10.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="WeldingTelemetry.proto" CSharpNamespace="WeldingSystem.Contracts.Proto" />
+  </ItemGroup>
+
+</Project>
